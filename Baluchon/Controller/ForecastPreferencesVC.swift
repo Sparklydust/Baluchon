@@ -16,6 +16,11 @@ class ForecastPreferencesVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // Swipe gesture to dismiss forecast preferences
+    let swipeToCancel = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    swipeToCancel.direction = .down
+    self.view.addGestureRecognizer(swipeToCancel)
   }
   
   //TODO: Hide user input when segment location is on "Cuurent Location"
@@ -46,3 +51,11 @@ extension ForecastPreferencesVC {
   }
 }
 
+// MARK: - Method to dismiss view by swiping down
+extension ForecastPreferencesVC {
+  @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+    if sender.direction == .down {
+      dismiss(animated: true, completion: nil)
+    }
+  }
+}

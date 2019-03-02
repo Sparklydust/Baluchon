@@ -21,7 +21,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="63" translatesAutoresizingMaskIntoConstraints="NO" id="SOl-9N-dyh">
                                 <rect key="frame" x="40" y="156" width="295" height="375"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="1980X1980" translatesAutoresizingMaskIntoConstraints="NO" id="J8Y-FJ-7E9">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Icon-PNG" translatesAutoresizingMaskIntoConstraints="NO" id="J8Y-FJ-7E9">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="207"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Baluchon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TEi-g3-Zx8">
@@ -49,6 +49,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1980X1980" width="1980" height="1980"/>
+        <image name="Icon-PNG" width="1000" height="619"/>
     </resources>
 </document>

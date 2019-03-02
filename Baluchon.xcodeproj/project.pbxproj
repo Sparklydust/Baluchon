@@ -14,6 +14,8 @@
 		2A56A37D22242C2F00745DEB /* APIsRuler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A56A37C22242C2F00745DEB /* APIsRuler.swift */; };
 		2A6EB68B2228990100F71B0F /* ExchangePreferencesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EB68A2228990100F71B0F /* ExchangePreferencesVC.swift */; };
 		2A6EB68D2228993600F71B0F /* TranslatorPreferencesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EB68C2228993600F71B0F /* TranslatorPreferencesVC.swift */; };
+		2A8C4F732229D47C00AC2065 /* Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C4F722229D47B00AC2065 /* Currencies.swift */; };
+		2A8C4F75222A1DEF00AC2065 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8C4F74222A1DEF00AC2065 /* Languages.swift */; };
 		2A8F97782226E30500260A92 /* ForecastPreferencesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8F97772226E30500260A92 /* ForecastPreferencesVC.swift */; };
 		2AE018A32220FC6000D24EDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE018A22220FC6000D24EDE /* AppDelegate.swift */; };
 		2AE018A82220FC6000D24EDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AE018A62220FC6000D24EDE /* Main.storyboard */; };
@@ -47,6 +49,8 @@
 		2A56A37C22242C2F00745DEB /* APIsRuler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIsRuler.swift; sourceTree = "<group>"; };
 		2A6EB68A2228990100F71B0F /* ExchangePreferencesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangePreferencesVC.swift; sourceTree = "<group>"; };
 		2A6EB68C2228993600F71B0F /* TranslatorPreferencesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorPreferencesVC.swift; sourceTree = "<group>"; };
+		2A8C4F722229D47B00AC2065 /* Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currencies.swift; sourceTree = "<group>"; };
+		2A8C4F74222A1DEF00AC2065 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
 		2A8F97772226E30500260A92 /* ForecastPreferencesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastPreferencesVC.swift; sourceTree = "<group>"; };
 		2AE0189F2220FC6000D24EDE /* Baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baluchon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AE018A22220FC6000D24EDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				2A56A37C22242C2F00745DEB /* APIsRuler.swift */,
+				2A8C4F722229D47B00AC2065 /* Currencies.swift */,
+				2A8C4F74222A1DEF00AC2065 /* Languages.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -306,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A8C4F732229D47C00AC2065 /* Currencies.swift in Sources */,
 				2A6EB68D2228993600F71B0F /* TranslatorPreferencesVC.swift in Sources */,
 				2A56A3752224205C00745DEB /* ExchangeRateViewController.swift in Sources */,
 				2A56A379222420CB00745DEB /* ForecastViewController.swift in Sources */,
@@ -314,6 +321,7 @@
 				2A6EB68B2228990100F71B0F /* ExchangePreferencesVC.swift in Sources */,
 				2A8F97782226E30500260A92 /* ForecastPreferencesVC.swift in Sources */,
 				2A56A377222420B400745DEB /* TranslatorViewController.swift in Sources */,
+				2A8C4F75222A1DEF00AC2065 /* Languages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
