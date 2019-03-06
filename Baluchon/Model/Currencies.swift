@@ -7,17 +7,17 @@
 //
 
 import Foundation
+import UIKit
+
+typealias CurrencyTuple = (name: String, symbol: String, flag: UIImage )
 
 struct Currencies {
-  
-  var topChoice = [String]()
-  var BottomChoice = [String]()
-//  var topChoice = currencyISOCode
-//  var BottomChoice = currencyISOCode
+  var top: CurrencyTuple
+  var bottom: CurrencyTuple
 }
 
-let currencyISOCode = [
-  "Euro": "€",
-  "Dollars": "$"
-  
+let currencyISOCode: [CurrencyTuple] = [
+  ("Euro", "€", #imageLiteral(resourceName: "european-union")),
+  ("Dollars", "$", #imageLiteral(resourceName: "united-states-of-america")),
+  ("Pound Sterling", "£", #imageLiteral(resourceName: "united-kingdom"))
 ]

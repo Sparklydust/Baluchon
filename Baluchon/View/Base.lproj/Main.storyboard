@@ -128,7 +128,7 @@
                                                             <action selector="changeBottomCurrency:" destination="EWE-Tg-Xhf" eventType="touchUpInside" id="coM-y7-0a8"/>
                                                         </connections>
                                                     </button>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mfF-gB-97N">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mfF-gB-97N">
                                                         <rect key="frame" x="45" y="0.0" width="255" height="45"/>
                                                         <color key="backgroundColor" red="0.98039215686274506" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="textColor"/>
@@ -208,10 +208,10 @@
                     <connections>
                         <outlet property="activityIndicator" destination="sLE-W1-DXa" id="Qr1-Fi-2hn"/>
                         <outlet property="bottomFlag" destination="5b6-eK-am5" id="jcM-2Z-W8y"/>
-                        <outlet property="bottomStackView" destination="CEb-qJ-0Vl" id="w0i-YY-Nv8"/>
+                        <outlet property="bottomSymbol" destination="Jzh-bH-YDR" id="XV0-MQ-hrM"/>
                         <outlet property="exchangeResponse" destination="mfF-gB-97N" id="hzL-6q-8pA"/>
                         <outlet property="topFlag" destination="iiR-wN-6hf" id="BPY-2U-PS1"/>
-                        <outlet property="topStackView" destination="OM6-ZS-Hu9" id="TZC-wQ-qeZ"/>
+                        <outlet property="topSymbol" destination="48A-9i-gcX" id="VfY-el-Tk6"/>
                         <outlet property="userEntry" destination="rvJ-AU-YvF" id="MPa-1Q-eUq"/>
                         <segue destination="JdJ-Gf-npX" kind="presentation" identifier="goToPreferences" id="o7H-h4-Pq2"/>
                     </connections>
@@ -445,7 +445,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PF3-1O-ZZQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="189"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="deu-xc-FB2">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud" translatesAutoresizingMaskIntoConstraints="NO" id="deu-xc-FB2">
                                                         <rect key="frame" x="0.0" y="5" width="295" height="179"/>
                                                         <color key="backgroundColor" red="0.98039215686274506" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </imageView>
@@ -461,7 +461,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="32℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bk9-IU-3ja">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bk9-IU-3ja">
                                                                 <rect key="frame" x="0.0" y="45" width="230" height="144"/>
                                                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="50"/>
                                                                 <nil key="textColor"/>
@@ -511,7 +511,7 @@
                                                     <action selector="changeLocation:" destination="wlA-1O-8Q1" eventType="touchUpInside" id="efo-JO-inX"/>
                                                     <action selector="getCurrencyConvertion:" destination="EWE-Tg-Xhf" eventType="touchUpInside" id="5qk-aO-NPL"/>
                                                     <action selector="getTextTranslation:" destination="gH3-4O-jVG" eventType="touchUpInside" id="kCG-ne-Ikj"/>
-                                                    <segue destination="D7e-bi-OQW" kind="presentation" id="1LR-UR-lx8"/>
+                                                    <segue destination="D7e-bi-OQW" kind="presentation" identifier="goToPreferences" id="1LR-UR-lx8"/>
                                                 </connections>
                                             </button>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1wt-5q-CTB">
@@ -536,14 +536,14 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDa-Ba-66c">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="189"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="storm" translatesAutoresizingMaskIntoConstraints="NO" id="eeO-cN-SWs">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="eeO-cN-SWs">
                                                         <rect key="frame" x="0.0" y="5" width="295" height="179"/>
                                                         <color key="backgroundColor" red="0.98039215686274506" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Hin-O0-CS7">
                                                         <rect key="frame" x="115" y="0.0" width="230" height="189"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Chamonix" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdN-Iy-I4R">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Marseille" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdN-Iy-I4R">
                                                                 <rect key="frame" x="0.0" y="0.0" width="230" height="45"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="45" id="eaC-zh-mkW"/>
@@ -552,7 +552,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4q-IH-eWL">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="33℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4q-IH-eWL">
                                                                 <rect key="frame" x="0.0" y="45" width="230" height="144"/>
                                                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="50"/>
                                                                 <nil key="textColor"/>
@@ -656,7 +656,7 @@
                                                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" textContentType="address-level2"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="address-level2"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -678,7 +678,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" textContentType="address-level2"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="address-level2"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -1062,7 +1062,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.57254901960000004" green="0.60392156860000001" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.5725490196078431" green="0.60392156862745094" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="1MA-NO-lRb" firstAttribute="bottom" secondItem="hnU-QS-tvR" secondAttribute="bottom" constant="35" id="6V1-jJ-Mgq"/>
                             <constraint firstItem="1MA-NO-lRb" firstAttribute="trailing" secondItem="EfA-gS-iuR" secondAttribute="trailing" constant="15" id="72C-23-gRY"/>
@@ -1095,9 +1095,9 @@
         <image name="Exchange" width="29" height="29"/>
         <image name="Forecast" width="29" height="29"/>
         <image name="Translator" width="29" height="29"/>
+        <image name="cloud" width="384" height="384"/>
         <image name="european-union" width="409.60000610351562" height="409.60000610351562"/>
         <image name="france" width="409.60000610351562" height="409.60000610351562"/>
-        <image name="storm" width="384" height="384"/>
         <image name="sun" width="388" height="388"/>
         <image name="united-kingdom" width="409.60000610351562" height="409.60000610351562"/>
         <image name="united-states-of-america" width="409.60000610351562" height="409.60000610351562"/>

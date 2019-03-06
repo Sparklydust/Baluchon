@@ -10,9 +10,7 @@ import Foundation
 
 class APIsRuler {
   
-  private static let exchangeURL = URL(
-    string: "")
-  
+  private static let exchangeURL = URL(string: "")
   
   // Method to swap elements
   func swapElements<T>(_ a: inout T, _ b: inout T) {

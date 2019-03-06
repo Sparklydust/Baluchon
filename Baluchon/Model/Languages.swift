@@ -7,8 +7,17 @@
 //
 
 import Foundation
+import UIKit
 
-let worldLanguages = [
-  "French",
-  "English",
+typealias LanguageTuple = (language: String, flag: UIImage)
+
+struct Languages {
+  var top: LanguageTuple
+  var Bottom: LanguageTuple
+}
+
+let worldLanguages: [LanguageTuple] = [
+  ("French", #imageLiteral(resourceName: "france")),
+  ("English", #imageLiteral(resourceName: "united-kingdom")),
+  ("German", #imageLiteral(resourceName: "germany"))
 ]

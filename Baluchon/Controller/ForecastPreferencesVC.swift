@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol ChangeCityDelegate {
+  func userEnteredNewCityName(top: String, bottom: String)
+}
+
 class ForecastPreferencesVC: UIViewController {
   
   @IBOutlet weak var segmentLocationTracker: UISegmentedControl!
   @IBOutlet weak var userTopEntry: UITextField!
   @IBOutlet weak var userBottomEntry: UITextField!
+  
+  var delegate: ChangeCityDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,27 +29,33 @@ class ForecastPreferencesVC: UIViewController {
     self.view.addGestureRecognizer(swipeToCancel)
   }
   
-  //TODO: Hide user input when segment location is on "Cuurent Location"
+  //TODO: Hide user input when segment location is on "Current Location"
   @IBAction func locationTracker(_ sender: UISegmentedControl) {
-    if segmentLocationTracker.isEnabledForSegment(at: 0) {
-      userTopEntry.isHidden = true
-    }
-    else {
-      userTopEntry.isHidden = false
+    switch segmentLocationTracker.selectedSegmentIndex {
+    case 0:
+      userTopEntry.isEnabled = false
+      userTopEntry.backgroundColor = #colorLiteral(red: 0.5725490196, green: 0.6039215686, blue: 0.6705882353, alpha: 1)
+    case 1:
+      userTopEntry.isEnabled = true
+      userTopEntry.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
+    default: ()
     }
   }
   
+  // User send his cities entry to ForecastVC 
   @IBAction func saveChanges(_ sender: Any) {
-    dismiss(animated: true, completion: nil)
+    let topCity = userTopEntry.text!
+    let bottomCity = userBottomEntry.text!
+    delegate?.userEnteredNewCityName(top: topCity, bottom: bottomCity)
+    self.dismiss(animated: true, completion: nil)
   }
   
   @IBAction func dismissModal(_ sender: Any) {
-    dismiss(animated: true, completion: nil)
+    self.dismiss(animated: true, completion: nil)
   }
 }
 
-
-// MARK: dismiss keyboard
+//MARK: dismiss keyboard
 extension ForecastPreferencesVC {
   @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
     userTopEntry.resignFirstResponder()
@@ -51,7 +63,7 @@ extension ForecastPreferencesVC {
   }
 }
 
-// MARK: - Method to dismiss view by swiping down
+//MARK: - Method to dismiss view by swiping down
 extension ForecastPreferencesVC {
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
     if sender.direction == .down {

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ChangeCurrencyDelegate {
+  func userSetCurrency(top: CurrencyTuple, bottom: CurrencyTuple)
+}
+
 class ExchangePreferencesVC: UIViewController {
   
   @IBOutlet weak var topCurrencyLabel: UILabel!
@@ -15,11 +19,12 @@ class ExchangePreferencesVC: UIViewController {
   @IBOutlet weak var bottomCurrencyLabel: UILabel!
   @IBOutlet weak var bottomCurrencyPicker: UIPickerView!
   
-  var topPickerOptions = [String]()
-  var bottomPickerOptions = [String]()
+  var delegate: ChangeCurrencyDelegate?
   
-  // TODO: - Create a struct Currencies
-//  var userCurrenciesChoice = Currencies()
+  var topPickerOptions = [(name: String, symbol: String, flag: UIImage)]()
+  var bottomPickerOptions = [(name: String, symbol: String, flag: UIImage)]()
+  
+  var userCurrencyChoice: Currencies!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,8 +33,8 @@ class ExchangePreferencesVC: UIViewController {
     self.bottomCurrencyPicker.delegate = self
     self.topCurrencyPicker.dataSource = self
     self.bottomCurrencyPicker.dataSource = self
-    topPickerOptions = ["Euro - €", "Dollars - $"]
-    bottomPickerOptions = ["Euro - €", "Dollars - $"]
+    topPickerOptions = currencyISOCode
+    bottomPickerOptions = currencyISOCode
     
     // Swipe gesture to dismiss currency preferences
     let swipeToCancel = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
@@ -37,28 +42,28 @@ class ExchangePreferencesVC: UIViewController {
     self.view.addGestureRecognizer(swipeToCancel)
   }
   
-  //TODO: Set up pickerViews output
-  // User top and bottom pickerView choices
-//  func createTopAndBottomCurrency() {
-//    let topUserIndex = topCurrencyPicker.selectedRow(inComponent: 0)
-//    let bottomUserIndex = bottomCurrencyPicker.selectedRow(inComponent: 0)
-//    let topUserInput = currencyISOCode[topUserIndex]
-//    let bottomUserInput = currencyISOCode[bottomUserIndex]
-//    userCurrenciesChoice = Currencies(topChoice: topUserInput, BottomChoice: bottomUserInput)
-//  }
+   // User top and bottom pickerView choices
+  func createTopAndBottomCurrency() {
+    let topUserIndex = topCurrencyPicker.selectedRow(inComponent: 0)
+    let bottomUserIndex = bottomCurrencyPicker.selectedRow(inComponent: 0)
+    let topUserChoice = currencyISOCode[topUserIndex]
+    let bottomUserChoice = currencyISOCode[bottomUserIndex]
+    userCurrencyChoice = Currencies(top: topUserChoice, bottom: bottomUserChoice)
+  }
   
-  // MARK: - Cancel and Save Changes actions
+  //MARK: - Cancel and Save Changes actions
   @IBAction func saveChanges(_ sender: Any) {
-    //createTopAndBottomCurrency()
-    dismiss(animated: true, completion: nil)
+    createTopAndBottomCurrency()
+    delegate?.userSetCurrency(top: userCurrencyChoice.top, bottom: userCurrencyChoice.bottom)
+    self.dismiss(animated: true, completion: nil)
   }
   
   @IBAction func dismissModal(_ sender: Any) {
-    dismiss(animated: true, completion: nil)
+    self.dismiss(animated: true, completion: nil)
   }
 }
 
-// MARK: - Showing off top and bottom picker view options
+//MARK: - Showing off top and bottom picker view options
 extension ExchangePreferencesVC: UIPickerViewDelegate, UIPickerViewDataSource {
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
@@ -75,15 +80,15 @@ extension ExchangePreferencesVC: UIPickerViewDelegate, UIPickerViewDataSource {
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     if (pickerView.tag == 1) {
-      return topPickerOptions[row]
+      return topPickerOptions[row].name + "  " + topPickerOptions[row].symbol
     }
     else {
-      return bottomPickerOptions[row]
+      return bottomPickerOptions[row].name + "  " + bottomPickerOptions[row].symbol
     }
   }
 }
 
-// MARK: - Method to dismiss view by swiping down
+//MARK: - Method to dismiss view by swiping down
 extension ExchangePreferencesVC {
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
     if sender.direction == .down {
