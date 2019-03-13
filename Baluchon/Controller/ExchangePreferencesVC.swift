@@ -21,8 +21,8 @@ class ExchangePreferencesVC: UIViewController {
   
   var delegate: ChangeCurrencyDelegate?
   
-  var topPickerOptions = [(name: String, symbol: String, flag: UIImage)]()
-  var bottomPickerOptions = [(name: String, symbol: String, flag: UIImage)]()
+  var topPickerOptions = [(symbol: String, name: String, sign: String, flag: UIImage)]()
+  var bottomPickerOptions = [(symbol: String, name: String, sign: String, flag: UIImage)]()
   
   var userCurrencyChoice: Currencies!
   
@@ -80,10 +80,10 @@ extension ExchangePreferencesVC: UIPickerViewDelegate, UIPickerViewDataSource {
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     if (pickerView.tag == 1) {
-      return topPickerOptions[row].name + "  " + topPickerOptions[row].symbol
+      return topPickerOptions[row].name + "  " + topPickerOptions[row].sign
     }
     else {
-      return bottomPickerOptions[row].name + "  " + bottomPickerOptions[row].symbol
+      return bottomPickerOptions[row].name + "  " + bottomPickerOptions[row].sign
     }
   }
 }

@@ -21,8 +21,8 @@ class TranslatorPreferencesVC: UIViewController {
   
   var delegate: ChangeLanguageDelegate?
   
-  var topPickerOptions = [(language: String, flag: UIImage)]()
-  var bottomPickerOptions = [(language: String, flag: UIImage)]()
+  var topPickerOptions = [(code: String, language: String, flag: UIImage)]()
+  var bottomPickerOptions = [(code: String, language: String, flag: UIImage)]()
   
   var userLanguagesChoice: Languages!
   

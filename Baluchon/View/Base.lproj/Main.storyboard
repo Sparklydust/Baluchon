@@ -39,7 +39,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6NF-Li-8JK">
-                                <rect key="frame" x="15" y="50" width="345" height="230"/>
+                                <rect key="frame" x="15" y="50" width="345" height="300"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9I1-oy-fvQ">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="165"/>
@@ -74,7 +74,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="45" id="QeB-d0-cdv"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="30"/>
+                                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="29"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -128,7 +128,7 @@
                                                             <action selector="changeBottomCurrency:" destination="EWE-Tg-Xhf" eventType="touchUpInside" id="coM-y7-0a8"/>
                                                         </connections>
                                                     </button>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mfF-gB-97N">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="or press on a flag" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mfF-gB-97N">
                                                         <rect key="frame" x="45" y="0.0" width="255" height="45"/>
                                                         <color key="backgroundColor" red="0.98039215686274506" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="textColor"/>
@@ -141,7 +141,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="45" id="uLB-hL-iNX"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="30"/>
+                                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="29"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -161,7 +161,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTu-CG-pPB">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="45"/>
                                                 <color key="backgroundColor" red="0.36862745098039218" green="0.63921568627450975" blue="0.63921568627450975" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                 <state key="normal" title="Convert">
                                                     <color key="titleColor" red="0.28235294117647058" green="0.54509803921568623" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -171,10 +171,10 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="getCurrencyConvertion:" destination="EWE-Tg-Xhf" eventType="touchUpInside" id="cOe-XC-LP0"/>
+                                                    <action selector="convertCurrencies:" destination="EWE-Tg-Xhf" eventType="touchUpInside" id="2Po-If-LDu"/>
                                                 </connections>
                                             </button>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="sLE-W1-DXa">
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="sLE-W1-DXa">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
                                                 <color key="color" red="0.28235294117647058" green="0.54509803921568623" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </activityIndicatorView>
@@ -190,6 +190,12 @@
                                             <constraint firstAttribute="bottom" secondItem="sLE-W1-DXa" secondAttribute="bottom" id="yQG-yN-RwD"/>
                                         </constraints>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zM4-xh-8eq">
+                                        <rect key="frame" x="0.0" y="250" width="345" height="50"/>
+                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="19"/>
+                                        <color key="textColor" red="0.28235294119999998" green="0.5450980392" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -209,7 +215,10 @@
                         <outlet property="activityIndicator" destination="sLE-W1-DXa" id="Qr1-Fi-2hn"/>
                         <outlet property="bottomFlag" destination="5b6-eK-am5" id="jcM-2Z-W8y"/>
                         <outlet property="bottomSymbol" destination="Jzh-bH-YDR" id="XV0-MQ-hrM"/>
+                        <outlet property="convertButton" destination="WTu-CG-pPB" id="Y5w-Qj-VlX"/>
                         <outlet property="exchangeResponse" destination="mfF-gB-97N" id="hzL-6q-8pA"/>
+                        <outlet property="rateLabel" destination="zM4-xh-8eq" id="s7p-my-eJJ"/>
+                        <outlet property="swapButton" destination="iky-Bk-beJ" id="76M-zh-9HZ"/>
                         <outlet property="topFlag" destination="iiR-wN-6hf" id="BPY-2U-PS1"/>
                         <outlet property="topSymbol" destination="48A-9i-gcX" id="VfY-el-Tk6"/>
                         <outlet property="userEntry" destination="rvJ-AU-YvF" id="MPa-1Q-eUq"/>
@@ -277,9 +286,8 @@
                                                 <rect key="frame" x="0.0" y="50" width="345" height="90"/>
                                                 <color key="backgroundColor" red="0.98039215686274506" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <gestureRecognizers/>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="search" smartInsertDeleteType="yes"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="done" smartInsertDeleteType="no"/>
                                             </textView>
                                         </subviews>
                                         <constraints>
@@ -339,10 +347,9 @@
                                                     <constraint firstItem="HJ6-yx-qyC" firstAttribute="top" secondItem="lkN-cS-ZD6" secondAttribute="top" id="ohh-1U-uVA"/>
                                                 </constraints>
                                             </stackView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="v8N-Hu-JUQ">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Enter your text to be translated below the top flag or press on it to change languages." textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="v8N-Hu-JUQ">
                                                 <rect key="frame" x="0.0" y="50" width="345" height="90"/>
                                                 <color key="backgroundColor" red="0.98039215686274506" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -357,7 +364,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQ0-7t-Zbh">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="45"/>
                                                 <color key="backgroundColor" red="0.36862745098039218" green="0.63921568627450975" blue="0.63921568627450975" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                 <state key="normal" title="Translate">
                                                     <color key="titleColor" red="0.28235294117647058" green="0.54509803921568623" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -367,11 +374,10 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="getCurrencyConvertion:" destination="EWE-Tg-Xhf" eventType="touchUpInside" id="QVA-Qm-34H"/>
-                                                    <action selector="getTextTranslation:" destination="gH3-4O-jVG" eventType="touchUpInside" id="Tcn-Nu-uZQ"/>
+                                                    <action selector="getTranslation:" destination="gH3-4O-jVG" eventType="touchUpInside" id="JOY-3U-Rpv"/>
                                                 </connections>
                                             </button>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gi4-w4-9RR">
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gi4-w4-9RR">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
                                                 <color key="color" red="0.28235294117647058" green="0.54509803921568623" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </activityIndicatorView>
@@ -406,8 +412,10 @@
                         <outlet property="activityIndicator" destination="gi4-w4-9RR" id="tlg-XE-VeD"/>
                         <outlet property="bottomFlag" destination="HJ6-yx-qyC" id="VqR-3X-Z6q"/>
                         <outlet property="bottomLabel" destination="5PI-Sa-QBE" id="SY1-pM-dIx"/>
+                        <outlet property="swapButton" destination="m2u-Mb-q1D" id="wIe-jo-HyG"/>
                         <outlet property="topFlag" destination="R2X-aN-CMo" id="IEU-Rd-ZFm"/>
                         <outlet property="topLabel" destination="gSO-s6-eGY" id="Oj0-fg-ypE"/>
+                        <outlet property="translateButton" destination="GQ0-7t-Zbh" id="doy-TA-amQ"/>
                         <outlet property="translationOutput" destination="v8N-Hu-JUQ" id="QfY-Vq-ONh"/>
                         <outlet property="userEntry" destination="C6V-EO-6uP" id="Ctt-pE-f8N"/>
                         <segue destination="dT9-bX-dCM" kind="presentation" identifier="goToPreferences" id="Ge6-j9-0gi"/>
@@ -498,7 +506,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82w-e8-u7F">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="45"/>
                                                 <color key="backgroundColor" red="0.67843137254901964" green="0.82352941176470584" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <state key="normal" title="Change Location">
                                                     <color key="titleColor" red="0.28235294117647058" green="0.54509803921568623" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -509,12 +517,10 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="changeLocation:" destination="wlA-1O-8Q1" eventType="touchUpInside" id="efo-JO-inX"/>
-                                                    <action selector="getCurrencyConvertion:" destination="EWE-Tg-Xhf" eventType="touchUpInside" id="5qk-aO-NPL"/>
-                                                    <action selector="getTextTranslation:" destination="gH3-4O-jVG" eventType="touchUpInside" id="kCG-ne-Ikj"/>
                                                     <segue destination="D7e-bi-OQW" kind="presentation" identifier="goToPreferences" id="1LR-UR-lx8"/>
                                                 </connections>
                                             </button>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1wt-5q-CTB">
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1wt-5q-CTB">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
                                                 <color key="color" red="0.28235294117647058" green="0.54509803921568623" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </activityIndicatorView>
@@ -609,6 +615,7 @@
                         <outlet property="bottomCityLabel" destination="gdN-Iy-I4R" id="zJb-do-LGc"/>
                         <outlet property="bottomImage" destination="eeO-cN-SWs" id="Fxc-pk-ufd"/>
                         <outlet property="bottomTemperatureLabel" destination="A4q-IH-eWL" id="V6t-gm-wyc"/>
+                        <outlet property="preferencesButton" destination="82w-e8-u7F" id="Cmv-2x-h7o"/>
                         <outlet property="topCityLabel" destination="YHE-je-71c" id="hyW-i6-aro"/>
                         <outlet property="topImage" destination="deu-xc-FB2" id="fLq-gD-ZP3"/>
                         <outlet property="topTemperatureLabel" destination="Bk9-IU-3ja" id="1Uy-xw-8KZ"/>
@@ -696,7 +703,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6j5-0k-Xxf">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
                                         <color key="backgroundColor" red="0.22352941176470587" green="0.24313725490196078" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="0.94999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -715,7 +722,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="mfh-ZG-9YS"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <state key="normal" title="Save Changes">
                                             <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="0.94999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -783,23 +790,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9cG-GY-KaN">
-                                <rect key="frame" x="15" y="50" width="345" height="230"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="9cG-GY-KaN">
+                                <rect key="frame" x="15" y="50" width="345" height="325"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cj3-Rn-oBx">
-                                        <rect key="frame" x="0.0" y="0.0" width="345" height="107.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="140"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="your currency..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80Y-n3-Uga">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="q6M-M9-9Wi"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                                 <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <pickerView tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LRl-ub-E1U">
-                                                <rect key="frame" x="0.0" y="45" width="345" height="62.5"/>
+                                                <rect key="frame" x="0.0" y="45" width="345" height="95"/>
                                                 <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <outlet property="dataSource" destination="JdJ-Gf-npX" id="7gG-Es-3xB"/>
@@ -810,25 +817,26 @@
                                             <constraint firstItem="80Y-n3-Uga" firstAttribute="top" secondItem="cj3-Rn-oBx" secondAttribute="top" id="Bg5-dy-sM1"/>
                                             <constraint firstAttribute="trailing" secondItem="LRl-ub-E1U" secondAttribute="trailing" id="LFS-yB-S7M"/>
                                             <constraint firstAttribute="trailing" secondItem="80Y-n3-Uga" secondAttribute="trailing" id="VOI-Xn-VfN"/>
+                                            <constraint firstAttribute="height" constant="140" id="iXe-T8-qw9"/>
                                             <constraint firstAttribute="bottom" secondItem="LRl-ub-E1U" secondAttribute="bottom" id="id7-hN-P0P"/>
                                             <constraint firstItem="LRl-ub-E1U" firstAttribute="leading" secondItem="cj3-Rn-oBx" secondAttribute="leading" id="pXM-2F-1UJ"/>
                                             <constraint firstItem="80Y-n3-Uga" firstAttribute="leading" secondItem="cj3-Rn-oBx" secondAttribute="leading" id="td3-YZ-YIc"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LUs-f9-xzt">
-                                        <rect key="frame" x="0.0" y="122.5" width="345" height="107.5"/>
+                                        <rect key="frame" x="0.0" y="185" width="345" height="140"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to be converted to..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfG-PR-5kF">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="nlC-xM-1ul"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                                 <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <pickerView tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v9U-Nk-iO7">
-                                                <rect key="frame" x="0.0" y="45" width="345" height="62.5"/>
+                                                <rect key="frame" x="0.0" y="45" width="345" height="95"/>
                                                 <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <outlet property="dataSource" destination="JdJ-Gf-npX" id="NJc-gX-YbG"/>
@@ -841,13 +849,13 @@
                                             <constraint firstAttribute="trailing" secondItem="bfG-PR-5kF" secondAttribute="trailing" id="Vor-5g-BQu"/>
                                             <constraint firstAttribute="bottom" secondItem="v9U-Nk-iO7" secondAttribute="bottom" id="YMm-zN-qCG"/>
                                             <constraint firstItem="v9U-Nk-iO7" firstAttribute="leading" secondItem="LUs-f9-xzt" secondAttribute="leading" id="lDy-jf-a92"/>
+                                            <constraint firstAttribute="height" constant="140" id="tZ4-qW-bW7"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="cj3-Rn-oBx" firstAttribute="leading" secondItem="9cG-GY-KaN" secondAttribute="leading" id="9kF-7x-vg6"/>
                                     <constraint firstItem="cj3-Rn-oBx" firstAttribute="top" secondItem="9cG-GY-KaN" secondAttribute="top" id="HJl-Lt-l85"/>
-                                    <constraint firstAttribute="height" constant="230" id="PzO-Z5-scT"/>
                                     <constraint firstAttribute="trailing" secondItem="LUs-f9-xzt" secondAttribute="trailing" id="ViM-GX-qo1"/>
                                     <constraint firstAttribute="bottom" secondItem="LUs-f9-xzt" secondAttribute="bottom" id="ehJ-ER-wjE"/>
                                     <constraint firstItem="LUs-f9-xzt" firstAttribute="leading" secondItem="9cG-GY-KaN" secondAttribute="leading" id="h7X-2T-c0L"/>
@@ -860,7 +868,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncP-EP-5T0">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
                                         <color key="backgroundColor" red="0.22352941179999999" green="0.24313725489999999" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.94999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -879,7 +887,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="1rQ-o0-hBh"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <state key="normal" title="Save Changes">
                                             <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.94999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -939,8 +947,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="85" translatesAutoresizingMaskIntoConstraints="NO" id="EfA-gS-iuR">
-                                <rect key="frame" x="15" y="50" width="345" height="365"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="EfA-gS-iuR">
+                                <rect key="frame" x="15" y="50" width="345" height="325"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6S7-p9-CQ9">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="140"/>
@@ -950,7 +958,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="WNy-GT-mNe"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                                 <color key="textColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -973,14 +981,14 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="UFi-HU-4hm">
-                                        <rect key="frame" x="0.0" y="225" width="345" height="140"/>
+                                        <rect key="frame" x="0.0" y="185" width="345" height="140"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to be translated to..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hwi-UV-lTT">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="FUY-gc-cZc"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                                 <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1018,7 +1026,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xkk-Ye-vBU">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
                                         <color key="backgroundColor" red="0.22352941179999999" green="0.24313725489999999" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.94999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -1037,7 +1045,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="eZX-mT-98c"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <state key="normal" title="Save Changes">
                                             <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.94999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>

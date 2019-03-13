@@ -38,14 +38,15 @@ class ForecastPreferencesVC: UIViewController {
     case 1:
       userTopEntry.isEnabled = true
       userTopEntry.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
-    default: ()
+    default:
+      break
     }
   }
   
   // User send his cities entry to ForecastVC 
   @IBAction func saveChanges(_ sender: Any) {
-    let topCity = userTopEntry.text!
-    let bottomCity = userBottomEntry.text!
+    let topCity = userTopEntry.text!.capitalized
+    let bottomCity = userBottomEntry.text!.capitalized
     delegate?.userEnteredNewCityName(top: topCity, bottom: bottomCity)
     self.dismiss(animated: true, completion: nil)
   }
