@@ -15,18 +15,17 @@ class APIsRuler {
   // ExchangeRate API URL
   static let exchangeURL = URL(
     string: "https://data.fixer.io/api/convert")!
-  static let exchangeAPI = ""
+  static let exchangeAPI = "ac592b9b92d16bd56513771a84b21d1a"
   // Translator API URL
   static let translationURL = URL(
     string: "https://translation.googleapis.com/language/translate/v2/")!
-  static let translationAPI = ""
+  static let translationAPI = "AIzaSyCPvsgbBeZHqA88w0PdbzUW_4q2_0F6Jzw"
   // WeatherForecast API URL
   static let weatherURL = URL(
     string: "http://openweathermap.org/data/2.5/weather")!
-  static let weatherAPI = ""
+  static let weatherAPI = "b6907d289e10d714a6e88b30761fae22"
   
   var task: URLSessionDataTask?
-  
 }
 
 //MARK: - Method for the user to swap elements
@@ -57,7 +56,9 @@ extension APIsRuler {
         }
         do {
           let responseJSON = try JSONDecoder().decode(ExchangeRoot.self, from: data)
-          let conversionResult = ConversionResult(exchangeRate: responseJSON.info.rate, exchangeResult: responseJSON.result)
+          let conversionResult = ConversionResult(
+            exchangeRate: responseJSON.info.rate,
+            exchangeResult: responseJSON.result)
           callback(true, conversionResult)
         }
         catch {
@@ -68,7 +69,6 @@ extension APIsRuler {
     task?.resume()
   }
 }
-
 
 //MARK: - Networking the translator user input data
 extension APIsRuler {
@@ -90,7 +90,8 @@ extension APIsRuler {
         }
         do {
           let responseJSON = try JSONDecoder().decode(LanguageRoot.self, from: data)
-          let translationResult = TranslationResult(result: responseJSON.data.translations[0].translatedText)
+          let translationResult = TranslationResult(
+            result: responseJSON.data.translations[0].translatedText)
           callback(true, translationResult)
         }
         catch {
@@ -121,7 +122,10 @@ extension APIsRuler {
         do {
           let responseJSON = try JSONDecoder().decode(WeatherRoot.self, from: data)
 
-          let weatherLatLonResult = WeatherResult(temperature: responseJSON.main.temp, city: responseJSON.name, weatherCondition: updateWeatherIcon(condition: responseJSON.weather[0].id))
+          let weatherLatLonResult = WeatherResult(
+            temperature: responseJSON.main.temp,
+            city: responseJSON.name,
+            weatherCondition: updateWeatherIcon(condition: responseJSON.weather[0].id))
           callback(true, weatherLatLonResult)
         }
         catch {
@@ -152,7 +156,10 @@ extension APIsRuler {
         do {
           let responseJSON = try JSONDecoder().decode(WeatherRoot.self, from: data)
           
-          let weatherCityResult = WeatherResult(temperature: responseJSON.main.temp, city: responseJSON.name, weatherCondition: updateWeatherIcon(condition: responseJSON.weather[0].id))
+          let weatherCityResult = WeatherResult(
+            temperature: responseJSON.main.temp,
+            city: responseJSON.name,
+            weatherCondition: updateWeatherIcon(condition: responseJSON.weather[0].id))
           callback(true, weatherCityResult)
         }
         catch {

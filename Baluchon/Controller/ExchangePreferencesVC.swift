@@ -14,6 +14,10 @@ protocol ChangeCurrencyDelegate {
 
 class ExchangePreferencesVC: UIViewController {
   
+  let defaults = UserDefaults.standard
+  let topKey = "topPicker"
+  let bottomKey = "bottomPicker"
+  
   @IBOutlet weak var topCurrencyLabel: UILabel!
   @IBOutlet weak var topCurrencyPicker: UIPickerView!
   @IBOutlet weak var bottomCurrencyLabel: UILabel!
@@ -25,30 +29,33 @@ class ExchangePreferencesVC: UIViewController {
   var bottomPickerOptions = [(symbol: String, name: String, sign: String, flag: UIImage)]()
   
   var userCurrencyChoice: Currencies!
+  var money = CurrencyISOCode()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    swapDownToCancelView()
     
     self.topCurrencyPicker.delegate = self
     self.bottomCurrencyPicker.delegate = self
     self.topCurrencyPicker.dataSource = self
     self.bottomCurrencyPicker.dataSource = self
-    topPickerOptions = currencyISOCode
-    bottomPickerOptions = currencyISOCode
+    topPickerOptions = money.currencyISOCode.sorted(by: {$0.1 < $1.1})
+    bottomPickerOptions = money.currencyISOCode.sorted(by: {$0.1 < $1.1})
     
-    // Swipe gesture to dismiss currency preferences
-    let swipeToCancel = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-    swipeToCancel.direction = .down
-    self.view.addGestureRecognizer(swipeToCancel)
+    setPickerViewToUserSelection()
   }
   
    // User top and bottom pickerView choices
   func createTopAndBottomCurrency() {
     let topUserIndex = topCurrencyPicker.selectedRow(inComponent: 0)
     let bottomUserIndex = bottomCurrencyPicker.selectedRow(inComponent: 0)
-    let topUserChoice = currencyISOCode[topUserIndex]
-    let bottomUserChoice = currencyISOCode[bottomUserIndex]
+    let topUserChoice = money.currencyISOCode[topUserIndex]
+    let bottomUserChoice = money.currencyISOCode[bottomUserIndex]
     userCurrencyChoice = Currencies(top: topUserChoice, bottom: bottomUserChoice)
+    
+    // Save user pickers Choice
+    defaults.set(topUserIndex, forKey: topKey)
+    defaults.set(bottomUserIndex, forKey: bottomKey)
   }
   
   //MARK: - Cancel and Save Changes actions
@@ -94,5 +101,22 @@ extension ExchangePreferencesVC {
     if sender.direction == .down {
       dismiss(animated: true, completion: nil)
     }
+  }
+}
+
+//MARK: - Swipe Down to cancel view
+extension ExchangePreferencesVC {
+  func swapDownToCancelView() {
+    let swipeToCancel = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    swipeToCancel.direction = .down
+    self.view.addGestureRecognizer(swipeToCancel)
+  }
+}
+
+//MARK: - Set pickerViews to user selections
+extension ExchangePreferencesVC {
+  func setPickerViewToUserSelection() {
+    topCurrencyPicker.selectRow(defaults.integer(forKey: topKey), inComponent: 0, animated: true)
+    bottomCurrencyPicker.selectRow(defaults.integer(forKey: bottomKey), inComponent: 0, animated: true)
   }
 }

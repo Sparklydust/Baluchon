@@ -14,6 +14,10 @@ protocol ChangeLanguageDelegate {
 
 class TranslatorPreferencesVC: UIViewController {
   
+  let defaults = UserDefaults.standard
+  let topKey = "topPicker"
+  let bottomKey = "bottomPicker"
+  
   @IBOutlet weak var topLanguageLabel: UILabel!
   @IBOutlet weak var topLanguagePicker: UIPickerView!
   @IBOutlet weak var bottomLanguageLabel: UILabel!
@@ -25,30 +29,33 @@ class TranslatorPreferencesVC: UIViewController {
   var bottomPickerOptions = [(code: String, language: String, flag: UIImage)]()
   
   var userLanguagesChoice: Languages!
+  var language = WorldLanguages()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    swapDownToCancelView()
     
     self.topLanguagePicker.delegate = self
     self.bottomLanguagePicker.delegate = self
     self.topLanguagePicker.dataSource = self
     self.bottomLanguagePicker.dataSource = self
-    topPickerOptions = worldLanguages
-    bottomPickerOptions = worldLanguages
+    topPickerOptions = language.worldLanguages.sorted(by: {$0.1 < $1.1})
+    bottomPickerOptions = language.worldLanguages.sorted(by: {$0.1 < $1.1})
     
-    // Swipe gesture to dismiss translator preferences
-    let swipeToCancel = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-    swipeToCancel.direction = .down
-    self.view.addGestureRecognizer(swipeToCancel)
+    setPickerViewToUserSelection()
   }
   
   // User top and bottom pickerView choices
   func createTopAndBottomLanguage() {
     let topUserIndex = topLanguagePicker.selectedRow(inComponent: 0)
     let bottomUserIndex = bottomLanguagePicker.selectedRow(inComponent: 0)
-    let topUserChoice = worldLanguages[topUserIndex]
-    let bottomUserChoice = worldLanguages[bottomUserIndex]
+    let topUserChoice = language.worldLanguages[topUserIndex]
+    let bottomUserChoice = language.worldLanguages[bottomUserIndex]
     userLanguagesChoice = Languages(top: topUserChoice, Bottom: bottomUserChoice)
+    
+    // Save user pickers Choice
+    defaults.set(topUserIndex, forKey: topKey)
+    defaults.set(bottomUserIndex, forKey: bottomKey)
   }
 
   //MARK: - Cancel and Save Changes actions
@@ -94,5 +101,22 @@ extension TranslatorPreferencesVC {
     if sender.direction == .down {
       dismiss(animated: true, completion: nil)
     }
+  }
+}
+
+//MARK: - Swipe Down to cancel view
+extension TranslatorPreferencesVC {
+  func swapDownToCancelView() {
+    let swipeToCancel = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    swipeToCancel.direction = .down
+    self.view.addGestureRecognizer(swipeToCancel)
+  }
+}
+
+//MARK: - Set pickerViews to user selections
+extension TranslatorPreferencesVC {
+  func setPickerViewToUserSelection() {
+    topLanguagePicker.selectRow(defaults.integer(forKey: topKey), inComponent: 0, animated: true)
+    bottomLanguagePicker.selectRow(defaults.integer(forKey: bottomKey), inComponent: 0, animated: true)
   }
 }

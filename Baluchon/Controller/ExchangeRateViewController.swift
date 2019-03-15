@@ -12,11 +12,11 @@ class ExchangeRateViewController: UIViewController {
   
   @IBOutlet weak var topFlag: UIButton!
   @IBOutlet weak var userEntry: UITextField!
-  @IBOutlet weak var topSymbol: UILabel!
+  @IBOutlet weak var topSign: UILabel!
   @IBOutlet weak var swapButton: UIButton!
   @IBOutlet weak var bottomFlag: UIButton!
   @IBOutlet weak var exchangeResponse: UITextField!
-  @IBOutlet weak var bottomSymbol: UILabel!
+  @IBOutlet weak var bottomSign: UILabel!
   @IBOutlet weak var convertButton: UIButton!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var rateLabel: UILabel!
@@ -25,18 +25,18 @@ class ExchangeRateViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    triggerActivityIndicator(false)
-    
-    // Swipe gesture to move between tab Bar
-    let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-    leftSwipe.direction = .left
-    self.view.addGestureRecognizer(leftSwipe)
+    setupParamsAtLaunch()
+    swapBetweenTabBars()
   }
+  
+  // TODO: - Flags and data get back to their origin place when adking for new conversion after a switch action was made.
+  // TODO: - Save user settings on this VC
   
   // Swap the currency section between each other
   @IBAction func swapCurrency(_ sender: UIButton) {
+    clearTextViews()
     APIsRuler.shared.swapElements(&userEntry.text, &exchangeResponse.text)
-    APIsRuler.shared.swapElements(&topSymbol.text, &bottomSymbol.text)
+    APIsRuler.shared.swapElements(&topSign.text, &bottomSign.text)
     if let topFlagImageView = topFlag.imageView, let bottomFlagImageView = bottomFlag.imageView {
       APIsRuler.shared.swapElements(&topFlagImageView.image, &bottomFlagImageView.image)
     }
@@ -47,9 +47,10 @@ class ExchangeRateViewController: UIViewController {
 extension ExchangeRateViewController: ChangeCurrencyDelegate {
   func userSetCurrency(top: CurrencyTuple, bottom: CurrencyTuple) {
     self.topFlag.setImage(top.flag, for: .normal)
-    self.topSymbol.text = top.sign
+    self.topSign.text = top.sign
     self.bottomFlag.setImage(bottom.flag, for: .normal)
-    self.bottomSymbol.text = bottom.sign
+    self.bottomSign.text = bottom.sign
+    clearTextViews()
     
     params = ["from": top.symbol, "to": bottom.symbol]
   }
@@ -80,7 +81,7 @@ extension ExchangeRateViewController {
   }
   
   func updateUserView(rate: ConversionResult, result: ConversionResult) {
-    rateLabel.text = "1 \(self.topSymbol.text!)  =  \(rate.exchangeRate) \(self.bottomSymbol.text!)"
+    rateLabel.text = "1 \(self.topSign.text!)  =  \(rate.exchangeRate) \(self.bottomSign.text!)"
     exchangeResponse.text = "\(result.exchangeResult)"
   }
   
@@ -99,15 +100,26 @@ extension ExchangeRateViewController {
     topFlag.isEnabled = !action
     bottomFlag.isEnabled = !action
   }
+  
+  func clearTextViews() {
+    userEntry.text! = ""
+    exchangeResponse.text! = ""
+  }
 }
 
-//MARK: - Method to swipe between TabBars
+//MARK: - Methods to swipe between TabBars
 extension ExchangeRateViewController {
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
     if sender.direction == .left {
       self.tabBarController!.selectedIndex += 1
       userEntry.resignFirstResponder()
     }
+  }
+  
+  func swapBetweenTabBars() {
+    let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    leftSwipe.direction = .left
+    self.view.addGestureRecognizer(leftSwipe)
   }
 }
 
@@ -126,5 +138,15 @@ extension ExchangeRateViewController {
 extension ExchangeRateViewController {
   @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
     userEntry.resignFirstResponder()
+  }
+}
+
+//MARK: - Parameters at first app launch
+extension ExchangeRateViewController {
+  func setupParamsAtLaunch() {
+    triggerActivityIndicator(false)
+    params = ["from": "EUR", "to": "USD"]
+    topSign.text! = "€"
+    bottomSign.text! = "$"
   }
 }

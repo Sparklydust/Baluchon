@@ -14,7 +14,6 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
   let locationManager = CLLocationManager()
   
   var latLongParams = [String: String]()
-  var topCityParams = [String: String]()
   var bottomCityParams = [String: String]()
   
   @IBOutlet weak var topImage: UIImageView!
@@ -35,11 +34,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     locationManager.startUpdatingLocation()
     
     activityIndicator.isHidden = true
-    
-    // Swipe gesture to move between tab Bar
-    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-    rightSwipe.direction = .right
-    self.view.addGestureRecognizer(rightSwipe)
+    swapBetweenTabBars()
   }
   
   @IBAction func changeLocation(_ sender: UIButton) {
@@ -108,16 +103,14 @@ extension ForecastViewController {
 
 //MARK: - Delegate of the ChangeCity protocol that brings user city preferences
 extension ForecastViewController: ChangeCityDelegate {
-  func userEnteredNewCityName(top: String, bottom: String) {
-    topCityObserver(topCity: top)
-    bottomCityObserver(bottomCity: bottom)
+  func userEnteredNewCityName(_ name: String) {
+    bottomCityObserver(bottomCity: name)
     
-    topCityParams = ["q": top]
-    bottomCityParams = ["q": bottom]
+    bottomCityParams = ["q": name]
     
     // Calling the api with a function here to get the weather
     activityIndicator.isHidden = false
-    APIsRuler.shared.getCityForecast(city: bottom) { (success, weatherCityResult) in
+    APIsRuler.shared.getCityForecast(city: name) { (success, weatherCityResult) in
       self.activityIndicator.isHidden = true
       if success, let weatherCityResult = weatherCityResult {
         self.updateBottomUserView(with: weatherCityResult)
@@ -135,17 +128,7 @@ extension ForecastViewController: ChangeCityDelegate {
     }
   }
   
-  //TODO: Setup the weather state observer
-  // Observe the state of the top and bottom user entry
-  func topCityObserver(topCity: String) {
-    if topCity.isEmpty == true {
-      topCityLabel.text = "Coordinate"
-    }
-    else {
-      topCityLabel.text = topCity
-    }
-  }
-  
+  // Observe the state of the preferences user entry
   func bottomCityObserver(bottomCity: String) {
     if bottomCity.isEmpty == true {
       bottomCityLabel.text = ""
@@ -153,17 +136,20 @@ extension ForecastViewController: ChangeCityDelegate {
       bottomImage.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
       bottomTemperatureLabel.text = ""
     }
-    else {
-      bottomCityLabel.text = bottomCity
-    }
   }
 }
 
-//MARK: - Method to swipe between tab Bar
+//MARK: - Method used to swipe between tab Bar
 extension ForecastViewController {
   @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
     if sender.direction == .right {
       self.tabBarController!.selectedIndex -= 1
     }
+  }
+  
+  func swapBetweenTabBars() {
+    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    rightSwipe.direction = .right
+    self.view.addGestureRecognizer(rightSwipe)
   }
 }

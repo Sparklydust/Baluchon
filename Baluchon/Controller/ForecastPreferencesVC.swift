@@ -9,45 +9,31 @@
 import UIKit
 
 protocol ChangeCityDelegate {
-  func userEnteredNewCityName(top: String, bottom: String)
+  func userEnteredNewCityName(_ name: String)
 }
-
+//TODO: - Image forecast don't load when user empty field then put a city name again
 class ForecastPreferencesVC: UIViewController {
   
-  @IBOutlet weak var segmentLocationTracker: UISegmentedControl!
-  @IBOutlet weak var userTopEntry: UITextField!
   @IBOutlet weak var userBottomEntry: UITextField!
   
+  let defaults = UserDefaults.standard
+  let cityKey = "cityKey"
   var delegate: ChangeCityDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    // Swipe gesture to dismiss forecast preferences
-    let swipeToCancel = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-    swipeToCancel.direction = .down
-    self.view.addGestureRecognizer(swipeToCancel)
-  }
-  
-  //TODO: Hide user input when segment location is on "Current Location"
-  @IBAction func locationTracker(_ sender: UISegmentedControl) {
-    switch segmentLocationTracker.selectedSegmentIndex {
-    case 0:
-      userTopEntry.isEnabled = false
-      userTopEntry.backgroundColor = #colorLiteral(red: 0.5725490196, green: 0.6039215686, blue: 0.6705882353, alpha: 1)
-    case 1:
-      userTopEntry.isEnabled = true
-      userTopEntry.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
-    default:
-      break
+    swapDownToCancelView()
+    userBottomEntry.delegate = self
+    if let userSavedCity = defaults.string(forKey: cityKey) {
+      userBottomEntry.text! = userSavedCity
     }
   }
   
   // User send his cities entry to ForecastVC 
   @IBAction func saveChanges(_ sender: Any) {
-    let topCity = userTopEntry.text!.capitalized
     let bottomCity = userBottomEntry.text!.capitalized
-    delegate?.userEnteredNewCityName(top: topCity, bottom: bottomCity)
+    delegate?.userEnteredNewCityName(bottomCity)
+    defaults.set(userBottomEntry.text!, forKey: cityKey)
     self.dismiss(animated: true, completion: nil)
   }
   
@@ -56,11 +42,17 @@ class ForecastPreferencesVC: UIViewController {
   }
 }
 
-//MARK: dismiss keyboard
-extension ForecastPreferencesVC {
+//MARK: Dismiss keyboard
+extension ForecastPreferencesVC: UITextFieldDelegate {
+  // Dismiss keyboard by tapping on screen
   @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
-    userTopEntry.resignFirstResponder()
     userBottomEntry.resignFirstResponder()
+  }
+  
+  // Dismiss keyboard by tapping the done button
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    self.view.endEditing(true)
+    return true
   }
 }
 
@@ -70,5 +62,14 @@ extension ForecastPreferencesVC {
     if sender.direction == .down {
       dismiss(animated: true, completion: nil)
     }
+  }
+}
+
+//MARK: - Swipe Down to cancel view
+extension ForecastPreferencesVC {
+  func swapDownToCancelView() {
+    let swipeToCancel = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    swipeToCancel.direction = .down
+    self.view.addGestureRecognizer(swipeToCancel)
   }
 }

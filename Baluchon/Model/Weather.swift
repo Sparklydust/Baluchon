@@ -28,7 +28,7 @@ struct WeatherResult {
   var weatherCondition: String
 }
 
-//This method turns a condition code into the name of the weather condition image
+// Turns a condition code into the name of the weather condition image
 func updateWeatherIcon(condition: Int) -> String {
   switch (condition) {
   case 200...232:
@@ -69,4 +69,3 @@ func updateWeatherIcon(condition: Int) -> String {
     return "dunno"
   }
 }
-
