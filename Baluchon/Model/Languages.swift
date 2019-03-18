@@ -16,7 +16,7 @@ struct Languages {
   var Bottom: LanguageTuple
 }
 
-struct TranslationResult {
+struct TranslationResult: Decodable {
   var result: String
 }
 
@@ -35,8 +35,6 @@ struct TranslatedText: Decodable {
 
 class WorldLanguages {
   let worldLanguages: [LanguageTuple] = [
-    ("fr", "French", #imageLiteral(resourceName: "france")),
-    ("en", "English", #imageLiteral(resourceName: "united-kingdom")),
     ("af", "Afrikaans", #imageLiteral(resourceName: "south-africa")),
     ("sq", "Albanian", #imageLiteral(resourceName: "albania")),
     ("am", "Amharic", #imageLiteral(resourceName: "ethiopia")),
@@ -141,5 +139,5 @@ class WorldLanguages {
     ("yi", "Yiddish", #imageLiteral(resourceName: "israel")),
     ("yo", "Yoruba", #imageLiteral(resourceName: "nigeria")),
     ("zu", "Zulu", #imageLiteral(resourceName: "south-africa"))
-  ]
+  ].sorted(by: {$0.1 < $1.1})
 }

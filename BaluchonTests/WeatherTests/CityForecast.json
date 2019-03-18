@@ -1,0 +1,43 @@
+{
+  "coord": {
+    "lon": 5.37,
+    "lat": 43.3
+  },
+  "weather": [
+    {
+      "id": 800,
+      "main": "Clear",
+      "description": "clear sky",
+      "icon": "01d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 13.95,
+    "pressure": 1018,
+    "humidity": 33,
+    "temp_min": 12.78,
+    "temp_max": 15
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 16.5,
+    "deg": 330,
+    "gust": 21.6
+  },
+  "clouds": {
+    "all": 0
+  },
+  "dt": 1552914019,
+  "sys": {
+    "type": 1,
+    "id": 6512,
+    "message": 0.0044,
+    "country": "FR",
+    "sunrise": 1552887971,
+    "sunset": 1552931235
+  },
+  "id": 2995469,
+  "name": "Marseille",
+  "cod": 200
+}

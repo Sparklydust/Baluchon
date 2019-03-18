@@ -13,19 +13,27 @@ class APIsRuler {
   private init() {}
   
   // ExchangeRate API URL
-  static let exchangeURL = URL(
+  private static let exchangeURL = URL(
     string: "https://data.fixer.io/api/convert")!
-  static let exchangeAPI = "ac592b9b92d16bd56513771a84b21d1a"
+  private static let exchangeAPI = valueForAPIKey(
+    named: "myExchangeRateAPIKey")
   // Translator API URL
-  static let translationURL = URL(
+  private static let translationURL = URL(
     string: "https://translation.googleapis.com/language/translate/v2/")!
-  static let translationAPI = "AIzaSyCPvsgbBeZHqA88w0PdbzUW_4q2_0F6Jzw"
+  private static let translationAPI = valueForAPIKey(
+    named: "myGoogleTranslateAPIKey")
   // WeatherForecast API URL
-  static let weatherURL = URL(
+  private static let weatherURL = URL(
     string: "http://openweathermap.org/data/2.5/weather")!
-  static let weatherAPI = "b6907d289e10d714a6e88b30761fae22"
+  private static let weatherAPI = valueForAPIKey(
+    named: "myOpenWeatherAPIKey")
   
-  var task: URLSessionDataTask?
+  private var task: URLSessionDataTask?
+  private var session = URLSession(configuration: .default)
+  
+  init(session: URLSession) {
+    self.session = session
+  }
 }
 
 //MARK: - Method for the user to swap elements
@@ -43,7 +51,6 @@ extension APIsRuler {
     let fullURL = APIsRuler.exchangeURL.absoluteString + "?access_key=\(APIsRuler.exchangeAPI)&from=\(from)&to=\(to)&amount=\(amount)"
     var request = URLRequest(url: URL(string: fullURL)!)
     request.httpMethod = "GET"
-    let session = URLSession(configuration: .default)
     
     task?.cancel()
     task = session.dataTask(with: request) { (data, response, error) in
@@ -72,12 +79,11 @@ extension APIsRuler {
 
 //MARK: - Networking the translator user input data
 extension APIsRuler {
-  func getTranslation(q: String, source: String, target: String, callback: @escaping (Bool, TranslationResult?) -> Void) {
+  func getTranslation(q: String, source: String, target: String, callback: @escaping (Bool, String?) -> Void) {
     let encodeUserEntry = q.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
     let fullURL = APIsRuler.translationURL.absoluteString + "?q=\(encodeUserEntry!)&source=\(source)&target=\(target)&key=\(APIsRuler.translationAPI)"
     var request = URLRequest(url: URL(string: fullURL)!)
     request.httpMethod = "GET"
-    let session = URLSession(configuration: .default)
     
     task?.cancel()
     task = session.dataTask(with: request) { (data, response, error) in
@@ -90,8 +96,7 @@ extension APIsRuler {
         }
         do {
           let responseJSON = try JSONDecoder().decode(LanguageRoot.self, from: data)
-          let translationResult = TranslationResult(
-            result: responseJSON.data.translations[0].translatedText)
+          let translationResult = responseJSON.data.translations[0].translatedText
           callback(true, translationResult)
         }
         catch {
@@ -109,7 +114,6 @@ extension APIsRuler {
     let fullURL = APIsRuler.weatherURL.absoluteString + "?lat=\(lat)&lon=\(lon)&appid=\(APIsRuler.weatherAPI)"
     var request = URLRequest(url: URL(string: fullURL)!)
     request.httpMethod = "GET"
-    let session = URLSession(configuration: .default)
     
     task = session.dataTask(with: request) { (data, response, error) in
       DispatchQueue.main.async {
@@ -143,7 +147,6 @@ extension APIsRuler {
     let fullURL = APIsRuler.weatherURL.absoluteString + "?q=\(city)&appid=\(APIsRuler.weatherAPI)"
     var request = URLRequest(url: URL(string: fullURL)!)
     request.httpMethod = "GET"
-    let session = URLSession(configuration: .default)
     
     task = session.dataTask(with: request) { (data, response, error) in
       DispatchQueue.main.async {

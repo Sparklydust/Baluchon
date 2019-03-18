@@ -71,17 +71,12 @@ extension TranslatorViewController {
       self.triggerActivityIndicator(false)
       self.setTranslationOutputFontBackToNormal()
       if success, let translationResult = translationResult {
-        self.updateUserView(with: translationResult)
+        self.translationOutput.text! = translationResult
       }
       else {
         self.presentAlert()
       }
     }
-  }
-  
-  // Update user view when data comes back
-  func updateUserView(with translation: TranslationResult) {
-    translationOutput.text! = "\(translation)"
   }
   
   // Show alert in case data can not be retrieve from network
@@ -147,19 +142,20 @@ extension TranslatorViewController: UITextViewDelegate {
   @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
     userEntry.resignFirstResponder()
   }
-  
-  //TODO: - Resign keyboard correctly
-//  // Dismiss keyboard by tapping the done button
-//  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//    if (text == "\n") {
-//      userEntry.resignFirstResponder()
-//      return false
-//    }
-//    return true
-//  }
+
+  // Dismiss keyboard by tapping the done button
+  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    if (text == "\n") {
+      userEntry.resignFirstResponder()
+      // Press on the button programmatically
+      translateButton.sendActions(for: .touchUpInside)
+      return false
+    }
+    return true
+  }
 }
 
-//MARK: - Parameters at first app launch
+//MARK: - UserView parameters at first app launch
 extension TranslatorViewController {
   func setupParamsAtLaunch() {
     triggerActivityIndicator(false)
@@ -168,13 +164,42 @@ extension TranslatorViewController {
     bottomFlag.imageView?.image = UIImage(named: "united-kingdom")
     topLabel.text! = "French"
     bottomLabel.text! = "English"
-    translationOutput.text! = "Enter your text to be translated below the top flag or press on it to change languages."
-    translationOutput.textColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
-    translationOutput.font = UIFont(name: "HelveticaNeue-Medium", size: 19.5)
+    userEntryPlaceholderState()
+    translationOutputPlaceholderState()
+  }
+  
+  func userEntryPlaceholderState() {
+    userEntry.text! =
+    "enter here your text to translate"
+    userEntry.textColor = UIColor(
+      red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
+    userEntry.font = UIFont(
+      name: "HelveticaNeue-Medium", size: 19.5)
+  }
+  
+  func setUserEntryFontBackToNormal() {
+    self.userEntry.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    self.userEntry.font = UIFont(
+      name: "Futura-Bold", size: 19)
+  }
+  
+  func textViewDidBeginEditing(_ textView: UITextView) {
+    userEntry.text! = ""
+    setUserEntryFontBackToNormal()
+  }
+  
+  func translationOutputPlaceholderState() {
+    translationOutput.text! =
+    "press a flag to change languages"
+    translationOutput.textColor = UIColor(
+      red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
+    translationOutput.font = UIFont(
+      name: "HelveticaNeue-Medium", size: 19.5)
   }
   
   func setTranslationOutputFontBackToNormal() {
     self.translationOutput.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    self.translationOutput.font = UIFont(name: "Futura-Bold", size: 16)
+    self.translationOutput.font = UIFont(
+      name: "Futura-Bold", size: 19)
   }
 }

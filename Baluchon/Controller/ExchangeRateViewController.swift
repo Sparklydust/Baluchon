@@ -9,7 +9,7 @@
 import UIKit
 
 class ExchangeRateViewController: UIViewController {
-  
+
   @IBOutlet weak var topFlag: UIButton!
   @IBOutlet weak var userEntry: UITextField!
   @IBOutlet weak var topSign: UILabel!
@@ -20,18 +20,19 @@ class ExchangeRateViewController: UIViewController {
   @IBOutlet weak var convertButton: UIButton!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var rateLabel: UILabel!
-  
+
   var params = [String: String]()
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupParamsAtLaunch()
     swapBetweenTabBars()
+    userEntry.delegate = self
   }
-  
-  // TODO: - Flags and data get back to their origin place when adking for new conversion after a switch action was made.
+
+  // TODO: - Flags and data get back to their origin place when asking for new conversion after a switch action was made.
   // TODO: - Save user settings on this VC
-  
+
   // Swap the currency section between each other
   @IBAction func swapCurrency(_ sender: UIButton) {
     clearTextViews()
@@ -43,6 +44,18 @@ class ExchangeRateViewController: UIViewController {
   }
 }
 
+//MARK: - Method to limit the number of decimal points
+extension ExchangeRateViewController: UITextFieldDelegate {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    if string == "," {
+      if textField.text!.contains(",") {
+        return false
+      }
+    }
+    return true
+  }
+}
+
 //MARK: - Delegate of the ChangeCurrency protocol that brings user preferences
 extension ExchangeRateViewController: ChangeCurrencyDelegate {
   func userSetCurrency(top: CurrencyTuple, bottom: CurrencyTuple) {
@@ -51,10 +64,10 @@ extension ExchangeRateViewController: ChangeCurrencyDelegate {
     self.bottomFlag.setImage(bottom.flag, for: .normal)
     self.bottomSign.text = bottom.sign
     clearTextViews()
-    
+
     params = ["from": top.symbol, "to": bottom.symbol]
   }
-  
+
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "goToPreferences" {
       let destinationVC = segue.destination as! ExchangePreferencesVC
@@ -68,10 +81,13 @@ extension ExchangeRateViewController {
   // User asks for the conversion of his input
   @IBAction func convertCurrencies(_ sender: UIButton) {
     triggerActivityIndicator(true)
-    APIsRuler.shared.getExchangeRate(from: params["from"]!, to: params["to"]!, amount: userEntry.text!) {
+    // Networking with only dot number
+    let dotOnly = userEntry.text?.replacingOccurrences(of: ",", with: ".")
+    APIsRuler.shared.getExchangeRate(from: params["from"]!, to: params["to"]!, amount: dotOnly!) {
       (success, conversionResult) in
       self.triggerActivityIndicator(false)
       if success, let conversionResult = conversionResult {
+        self.userEntry.becomeFirstResponder()
         self.updateUserView(rate: conversionResult, result: conversionResult)
       }
       else {
@@ -79,18 +95,18 @@ extension ExchangeRateViewController {
       }
     }
   }
-  
+
   func updateUserView(rate: ConversionResult, result: ConversionResult) {
     rateLabel.text = "1 \(self.topSign.text!)  =  \(rate.exchangeRate) \(self.bottomSign.text!)"
     exchangeResponse.text = "\(result.exchangeResult)"
   }
-  
+
   func presentAlert() {
     let alertVC = UIAlertController(title: "Error", message: "Sorry, there was an error loading data", preferredStyle: .alert)
     alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
     present(alertVC, animated: true, completion: nil)
   }
-  
+
   // Disable buttons and show Activity Indicator if true
   func triggerActivityIndicator(_ action: Bool) {
     convertButton.isHidden = action
@@ -100,7 +116,7 @@ extension ExchangeRateViewController {
     topFlag.isEnabled = !action
     bottomFlag.isEnabled = !action
   }
-  
+
   func clearTextViews() {
     userEntry.text! = ""
     exchangeResponse.text! = ""
@@ -115,7 +131,7 @@ extension ExchangeRateViewController {
       userEntry.resignFirstResponder()
     }
   }
-  
+
   func swapBetweenTabBars() {
     let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
     leftSwipe.direction = .left
@@ -128,7 +144,7 @@ extension ExchangeRateViewController {
   @IBAction func changeBottomCurrency(_ sender: UIButton) {
     performSegue(withIdentifier: "goToPreferences", sender: self)
   }
-  
+
   @IBAction func changeTopCurrency(_ sender: UIButton) {
     performSegue(withIdentifier: "goToPreferences", sender: self)
   }

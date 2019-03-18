@@ -15,8 +15,8 @@ protocol ChangeLanguageDelegate {
 class TranslatorPreferencesVC: UIViewController {
   
   let defaults = UserDefaults.standard
-  let topKey = "topPicker"
-  let bottomKey = "bottomPicker"
+  let topKey = "topTranslatorPicker"
+  let bottomKey = "bottomTranslatorPicker"
   
   @IBOutlet weak var topLanguageLabel: UILabel!
   @IBOutlet weak var topLanguagePicker: UIPickerView!
@@ -35,13 +35,15 @@ class TranslatorPreferencesVC: UIViewController {
     super.viewDidLoad()
     swapDownToCancelView()
     
+    // Setting up pickerView delegate
     self.topLanguagePicker.delegate = self
     self.bottomLanguagePicker.delegate = self
     self.topLanguagePicker.dataSource = self
     self.bottomLanguagePicker.dataSource = self
-    topPickerOptions = language.worldLanguages.sorted(by: {$0.1 < $1.1})
-    bottomPickerOptions = language.worldLanguages.sorted(by: {$0.1 < $1.1})
+    topPickerOptions = language.worldLanguages
+    bottomPickerOptions = language.worldLanguages
     
+    // Retrieve user pickerViews last position
     setPickerViewToUserSelection()
   }
   
@@ -53,7 +55,7 @@ class TranslatorPreferencesVC: UIViewController {
     let bottomUserChoice = language.worldLanguages[bottomUserIndex]
     userLanguagesChoice = Languages(top: topUserChoice, Bottom: bottomUserChoice)
     
-    // Save user pickers Choice
+    // Save user pickerViews Choice
     defaults.set(topUserIndex, forKey: topKey)
     defaults.set(bottomUserIndex, forKey: bottomKey)
   }

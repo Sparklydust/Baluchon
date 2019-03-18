@@ -32,11 +32,13 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     locationManager.requestAlwaysAuthorization()
     locationManager.startUpdatingLocation()
+    locationManager.allowsBackgroundLocationUpdates = true
     
     activityIndicator.isHidden = true
     swapBetweenTabBars()
   }
   
+  // Button that goes to User Preferences
   @IBAction func changeLocation(_ sender: UIButton) {
   }
 }
@@ -71,21 +73,21 @@ extension ForecastViewController {
     }
   }
   
-  // update the top user view when data comes back
+  // Update the top user view when data comes back
   func updateTopUserView(with: WeatherResult) {
     topCityLabel.text! = with.city
     topTemperatureLabel.text! = "\(Int(with.temperature))℃"
     topImage.image = UIImage(named: with.weatherCondition)
   }
   
-  // update the bottom user view when data comes back
+  // Update the bottom user view when data comes back
   func updateBottomUserView(with: WeatherResult) {
     bottomCityLabel.text! = with.city
     bottomTemperatureLabel.text! = "\(Int(with.temperature))℃"
     bottomImage.image = UIImage(named: with.weatherCondition)
   }
   
-  // show alert in case data can not be retrieve from network
+  // Show alert in case data can not be retrieve from network
   func presentAlert() {
     let alertVC = UIAlertController(title: "Error", message: "Sorry, there was an error loading data", preferredStyle: .alert)
     alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))

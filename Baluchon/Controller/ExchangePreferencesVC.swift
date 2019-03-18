@@ -15,8 +15,8 @@ protocol ChangeCurrencyDelegate {
 class ExchangePreferencesVC: UIViewController {
   
   let defaults = UserDefaults.standard
-  let topKey = "topPicker"
-  let bottomKey = "bottomPicker"
+  let topKey = "topExchangePicker"
+  let bottomKey = "bottomExchangePicker"
   
   @IBOutlet weak var topCurrencyLabel: UILabel!
   @IBOutlet weak var topCurrencyPicker: UIPickerView!
@@ -35,13 +35,15 @@ class ExchangePreferencesVC: UIViewController {
     super.viewDidLoad()
     swapDownToCancelView()
     
+    // Setting up pickerView delegate
     self.topCurrencyPicker.delegate = self
     self.bottomCurrencyPicker.delegate = self
     self.topCurrencyPicker.dataSource = self
     self.bottomCurrencyPicker.dataSource = self
-    topPickerOptions = money.currencyISOCode.sorted(by: {$0.1 < $1.1})
-    bottomPickerOptions = money.currencyISOCode.sorted(by: {$0.1 < $1.1})
+    topPickerOptions = money.currencyISOCode
+    bottomPickerOptions = money.currencyISOCode
     
+    // Retrieve user pickerViews last position
     setPickerViewToUserSelection()
   }
   
@@ -53,7 +55,7 @@ class ExchangePreferencesVC: UIViewController {
     let bottomUserChoice = money.currencyISOCode[bottomUserIndex]
     userCurrencyChoice = Currencies(top: topUserChoice, bottom: bottomUserChoice)
     
-    // Save user pickers Choice
+    // Save user pickerViews Choice
     defaults.set(topUserIndex, forKey: topKey)
     defaults.set(bottomUserIndex, forKey: bottomKey)
   }

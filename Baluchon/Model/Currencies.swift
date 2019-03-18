@@ -195,5 +195,5 @@ class CurrencyISOCode {
     ("ZAR", "South African Rand", "R", #imageLiteral(resourceName: "south-africa")),
     ("ZMW", "Zambian Kwacha", "ZK", #imageLiteral(resourceName: "zambia")),
     ("ZWL", "Zimbabwean Dollar", "$", #imageLiteral(resourceName: "zimbabwe"))
-  ]
+  ].sorted(by: {$0.1 < $1.1})
 }

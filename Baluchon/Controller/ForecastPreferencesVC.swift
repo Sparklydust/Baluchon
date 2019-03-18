@@ -12,6 +12,7 @@ protocol ChangeCityDelegate {
   func userEnteredNewCityName(_ name: String)
 }
 //TODO: - Image forecast don't load when user empty field then put a city name again
+//TODO: - App crashes when user enter new york as his favorite city
 class ForecastPreferencesVC: UIViewController {
   
   @IBOutlet weak var userBottomEntry: UITextField!
