@@ -48,10 +48,12 @@ class ExchangeRateViewController: UIViewController {
 
 //MARK: - Method to limit the number of decimal points
 extension ExchangeRateViewController: UITextFieldDelegate {
-  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+  func textField(_ textField: UITextField,
+                 shouldChangeCharactersIn range: NSRange,
                  replacementString string: String) -> Bool {
-    if string == "," {
-      if textField.text!.contains(",") {
+    if string == "," || string == "." {
+      if textField.text!.contains(",") ||
+        textField.text!.contains(".") {
         return false
       }
     }

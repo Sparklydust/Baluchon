@@ -5,6 +5,19 @@
 #Baluchon API Keys
 *.APIKeys.plist
 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>myExchangeRateAPIKey</key>
+    <string>a2deb819e417f8938eb5c4280eb3273c</string>
+    <key>myGoogleTranslateAPIKey</key>
+    <string>AIzaSyBdMWdkMt82lUEmddXr5Xumbnwetc8X5OU</string>
+    <key>myOpenWeatherAPIKey</key>
+    <string>b6907d289e10d714a6e88b30761fae22</string>
+</dict>
+</plist>
+
 ## Build generated
 build/
 DerivedData/
