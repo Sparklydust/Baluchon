@@ -9,9 +9,11 @@
 import UIKit
 
 class TranslatorViewController: UIViewController {
-  
-  var params = [String: String]()
-  
+
+  let defaults = UserDefaults.standard
+
+  private var params = [String: String]()
+
   @IBOutlet weak var topFlag: UIButton!
   @IBOutlet weak var topLabel: UILabel!
   @IBOutlet weak var userEntry: UITextView!
@@ -21,22 +23,25 @@ class TranslatorViewController: UIViewController {
   @IBOutlet weak var translationOutput: UITextView!
   @IBOutlet weak var translateButton: UIButton!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupParamsAtLaunch()
     swapBetweenTabBars()
     userEntry.delegate = self
   }
-  
+
   // Swap the language section between each other
   @IBAction func swapLanguage(_ sender: UIButton) {
     clearTextViews()
     APIsRuler.shared.swapElements(&topLabel.text, &bottomLabel.text)
     APIsRuler.shared.swapElements(&userEntry.text, &translationOutput.text)
-    if let topFlagImageView = topFlag.imageView, let bottomFlagImageView = bottomFlag.imageView {
-      APIsRuler.shared.swapElements(&topFlagImageView.image, &bottomFlagImageView.image)
+    if let topFlagImageView = topFlag.imageView,
+      let bottomFlagImageView = bottomFlag.imageView {
+      topFlag.setImage(bottomFlagImageView.image, for: .normal)
+      bottomFlag.setImage(topFlagImageView.image, for: .normal)
     }
+    params = ["source": params["target"]!, "target": params["source"]!]
   }
 }
 
@@ -48,10 +53,9 @@ extension TranslatorViewController: ChangeLanguageDelegate {
     self.bottomFlag.setImage(bottom.flag, for: .normal)
     self.bottomLabel.text = bottom.language
     clearTextViews()
-    
     params = ["source": top.code, "target": bottom.code]
   }
-  
+
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "goToPreferences" {
       let destinationVC = segue.destination as! TranslatorPreferencesVC
@@ -66,7 +70,8 @@ extension TranslatorViewController {
   @IBAction func getTranslation(_ sender: UIButton) {
     triggerActivityIndicator(true)
     translationOutput.text! = ""
-    APIsRuler.shared.getTranslation(q: userEntry.text!, source: params["source"]!, target: params["target"]!) {
+    APIsRuler.shared.getTranslation(
+    q: userEntry.text!, source: params["source"]!, target: params["target"]!) {
       (success, translationResult) in
       self.triggerActivityIndicator(false)
       self.setTranslationOutputFontBackToNormal()
@@ -78,14 +83,18 @@ extension TranslatorViewController {
       }
     }
   }
-  
+
   // Show alert in case data can not be retrieve from network
   func presentAlert() {
-    let alertVC = UIAlertController(title: "Error", message: "Sorry, there was an error loading data", preferredStyle: .alert)
-    alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+    let alertVC = UIAlertController(
+      title: "Error",
+      message: "Sorry, there was an error loading data",
+      preferredStyle: .alert)
+    alertVC.addAction(UIAlertAction(
+      title: "OK", style: .cancel, handler: nil))
     present(alertVC, animated: true, completion: nil)
   }
-  
+
   // Disable buttons and show Activity Indicator if true
   func triggerActivityIndicator(_ action: Bool) {
     translateButton.isHidden = action
@@ -96,7 +105,7 @@ extension TranslatorViewController {
     bottomFlag.isEnabled = !action
     userEntry.resignFirstResponder()
   }
-  
+
   func clearTextViews() {
     userEntry.text! = ""
     translationOutput.text! = ""
@@ -115,10 +124,12 @@ extension TranslatorViewController {
       userEntry.resignFirstResponder()
     }
   }
-  
+
   func swapBetweenTabBars() {
-    let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+    let leftSwipe = UISwipeGestureRecognizer(
+      target: self, action: #selector(handleSwipes(_:)))
+    let rightSwipe = UISwipeGestureRecognizer(
+      target: self, action: #selector(handleSwipes(_:)))
     leftSwipe.direction = .left
     rightSwipe.direction = .right
     self.view.addGestureRecognizer(leftSwipe)
@@ -159,15 +170,15 @@ extension TranslatorViewController: UITextViewDelegate {
 extension TranslatorViewController {
   func setupParamsAtLaunch() {
     triggerActivityIndicator(false)
-    params = ["source": "fr", "target": "en"]
-    topFlag.imageView?.image = UIImage(named: "france")
-    bottomFlag.imageView?.image = UIImage(named: "united-kingdom")
-    topLabel.text! = "French"
-    bottomLabel.text! = "English"
-    userEntryPlaceholderState()
-    translationOutputPlaceholderState()
+    if defaults.object(
+      forKey: TranslatorPreferencesVC.topLanPickerKey) != nil {
+      setUserSavedParameters()
+    }
+    else {
+      setDefaultsParameters()
+    }
   }
-  
+
   func userEntryPlaceholderState() {
     userEntry.text! =
     "enter here your text to translate"
@@ -176,18 +187,18 @@ extension TranslatorViewController {
     userEntry.font = UIFont(
       name: "HelveticaNeue-Medium", size: 19.5)
   }
-  
+
   func setUserEntryFontBackToNormal() {
     self.userEntry.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     self.userEntry.font = UIFont(
       name: "Futura-Bold", size: 19)
   }
-  
+
   func textViewDidBeginEditing(_ textView: UITextView) {
     userEntry.text! = ""
     setUserEntryFontBackToNormal()
   }
-  
+
   func translationOutputPlaceholderState() {
     translationOutput.text! =
     "press a flag to change languages"
@@ -196,10 +207,38 @@ extension TranslatorViewController {
     translationOutput.font = UIFont(
       name: "HelveticaNeue-Medium", size: 19.5)
   }
-  
+
   func setTranslationOutputFontBackToNormal() {
     self.translationOutput.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     self.translationOutput.font = UIFont(
       name: "Futura-Bold", size: 19)
+  }
+
+  func setDefaultsParameters() {
+    params = ["source": "fr", "target": "en"]
+    topFlag.setImage(#imageLiteral(resourceName: "france"), for: .normal)
+    bottomFlag.setImage(#imageLiteral(resourceName: "united-kingdom"), for: .normal)
+    topLabel.text! = "French"
+    bottomLabel.text! = "English"
+    userEntryPlaceholderState()
+    translationOutputPlaceholderState()
+  }
+
+  func setUserSavedParameters() {
+    topLabel.text! = defaults.string(
+      forKey: TranslatorPreferencesVC.topLanguageKey)!
+    bottomLabel.text! = defaults.string(
+      forKey: TranslatorPreferencesVC.bottomLanguageKey)!
+    topFlag.setImage(
+      UIImage(named: defaults.string(
+        forKey: TranslatorPreferencesVC.topLanImageKey)!), for: .normal)
+    bottomFlag.setImage(
+      UIImage(named: defaults.string(
+        forKey: TranslatorPreferencesVC.bottomLanImageKey)!), for: .normal)
+    params = [
+      "source": defaults.string(
+        forKey: TranslatorPreferencesVC.topLanCodeKey)!,
+      "target": defaults.string(
+        forKey: TranslatorPreferencesVC.bottomLanCodeKey)!]
   }
 }

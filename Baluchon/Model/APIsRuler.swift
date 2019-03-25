@@ -11,7 +11,7 @@ import Foundation
 class APIsRuler {
   static var shared = APIsRuler()
   private init() {}
-  
+
   // ExchangeRate API URL
   private static let exchangeURL = URL(
     string: "https://data.fixer.io/api/convert")!
@@ -27,10 +27,10 @@ class APIsRuler {
     string: "http://openweathermap.org/data/2.5/weather")!
   private static let weatherAPI = valueForAPIKey(
     named: "myOpenWeatherAPIKey")
-  
+
   private var task: URLSessionDataTask?
   private var session = URLSession(configuration: .default)
-  
+
   init(session: URLSession) {
     self.session = session
   }
@@ -51,7 +51,7 @@ extension APIsRuler {
     let fullURL = APIsRuler.exchangeURL.absoluteString + "?access_key=\(APIsRuler.exchangeAPI)&from=\(from)&to=\(to)&amount=\(amount)"
     var request = URLRequest(url: URL(string: fullURL)!)
     request.httpMethod = "GET"
-    
+
     task?.cancel()
     task = session.dataTask(with: request) { (data, response, error) in
       DispatchQueue.main.async {
@@ -84,7 +84,7 @@ extension APIsRuler {
     let fullURL = APIsRuler.translationURL.absoluteString + "?q=\(encodeUserEntry!)&source=\(source)&target=\(target)&key=\(APIsRuler.translationAPI)"
     var request = URLRequest(url: URL(string: fullURL)!)
     request.httpMethod = "GET"
-    
+
     task?.cancel()
     task = session.dataTask(with: request) { (data, response, error) in
       DispatchQueue.main.async {
@@ -114,7 +114,7 @@ extension APIsRuler {
     let fullURL = APIsRuler.weatherURL.absoluteString + "?lat=\(lat)&lon=\(lon)&appid=\(APIsRuler.weatherAPI)"
     var request = URLRequest(url: URL(string: fullURL)!)
     request.httpMethod = "GET"
-    
+
     task = session.dataTask(with: request) { (data, response, error) in
       DispatchQueue.main.async {
         guard let data = data, error == nil else {
@@ -125,7 +125,6 @@ extension APIsRuler {
         }
         do {
           let responseJSON = try JSONDecoder().decode(WeatherRoot.self, from: data)
-
           let weatherLatLonResult = WeatherResult(
             temperature: responseJSON.main.temp,
             city: responseJSON.name,
@@ -147,7 +146,7 @@ extension APIsRuler {
     let fullURL = APIsRuler.weatherURL.absoluteString + "?q=\(city)&appid=\(APIsRuler.weatherAPI)"
     var request = URLRequest(url: URL(string: fullURL)!)
     request.httpMethod = "GET"
-    
+
     task = session.dataTask(with: request) { (data, response, error) in
       DispatchQueue.main.async {
         guard let data = data, error == nil else {
@@ -158,7 +157,6 @@ extension APIsRuler {
         }
         do {
           let responseJSON = try JSONDecoder().decode(WeatherRoot.self, from: data)
-          
           let weatherCityResult = WeatherResult(
             temperature: responseJSON.main.temp,
             city: responseJSON.name,
