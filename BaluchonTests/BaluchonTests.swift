@@ -9,5 +9,4 @@
 @testable import Baluchon
 import XCTest
 
-class BaluchonTests: XCTestCase {
-}
+class BaluchonTests: XCTestCase { }

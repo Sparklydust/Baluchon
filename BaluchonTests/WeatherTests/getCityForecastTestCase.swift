@@ -44,7 +44,7 @@ class GetCityForecastTestCase: XCTestCase {
   
   func testGetCityShouldPostFailedCallbackIfIncorrectResponse() {
     // Given
-    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.cityForecastCorrectData, response: FakeResponseData.responsKO, error: nil))
+    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.cityForecastCorrectData, response: FakeResponseData.responseKO, error: nil))
     // When
     let expectation = XCTestExpectation(description: "Wait for queue change")
     apiSRuler.getCityForecast(city: "Marseille") { (success, WeatherResult) in
@@ -60,7 +60,7 @@ class GetCityForecastTestCase: XCTestCase {
   
   func testGetCityShouldPostFailedCallbackIfIncorrectData() {
     // Given
-    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.APIsRulerIncorrectData, response: FakeResponseData.responsOK, error: nil))
+    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.APIsRulerIncorrectData, response: FakeResponseData.responseOK, error: nil))
     // When
     let expectation = XCTestExpectation(description: "Wait for queue change")
     apiSRuler.getCityForecast(city: "Marseille") { (success, WeatherResult) in
@@ -76,7 +76,7 @@ class GetCityForecastTestCase: XCTestCase {
   
   func testGetCityShouldPostSuccessCallbackAndCorrectData() {
     // Given
-    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.cityForecastCorrectData, response: FakeResponseData.responsOK, error: nil))
+    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.cityForecastCorrectData, response: FakeResponseData.responseOK, error: nil))
     // When
     let expectation = XCTestExpectation(description: "Wait for queue change")
     apiSRuler.getCityForecast(city: "Marseille") { (success, WeatherResult) in

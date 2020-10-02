@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChangeCityDelegate {
+protocol ChangeCityDelegate: AnyObject {
   func userEnteredNewCityName(_ name: String)
 }
 
@@ -18,7 +18,7 @@ class ForecastPreferencesVC: UIViewController {
 
   let defaults = UserDefaults.standard
   static let cityKey = "bottomCityChoice"
-  var delegate: ChangeCityDelegate?
+  weak var delegate: ChangeCityDelegate?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,7 +30,7 @@ class ForecastPreferencesVC: UIViewController {
     }
   }
 
-  // User send his cities entry to ForecastVC 
+  // User send his city entry to ForecastVC 
   @IBAction func saveChanges(_ sender: Any) {
     let bottomCity = userBottomEntry.text!.capitalized
     delegate?.userEnteredNewCityName(bottomCity)

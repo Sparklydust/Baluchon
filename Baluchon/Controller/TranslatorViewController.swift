@@ -27,7 +27,7 @@ class TranslatorViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupParamsAtLaunch()
-    swapBetweenTabBars()
+    swipeBetweenTabBars()
     userEntry.delegate = self
   }
 
@@ -125,7 +125,7 @@ extension TranslatorViewController {
     }
   }
 
-  func swapBetweenTabBars() {
+  func swipeBetweenTabBars() {
     let leftSwipe = UISwipeGestureRecognizer(
       target: self, action: #selector(handleSwipes(_:)))
     let rightSwipe = UISwipeGestureRecognizer(

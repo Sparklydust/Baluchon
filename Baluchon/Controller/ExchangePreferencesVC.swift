@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChangeCurrencyDelegate {
+protocol ChangeCurrencyDelegate: AnyObject {
   func userSetCurrency(top: CurrencyTuple, bottom: CurrencyTuple)
 }
 
@@ -29,7 +29,7 @@ class ExchangePreferencesVC: UIViewController {
   @IBOutlet weak var bottomCurrencyLabel: UILabel!
   @IBOutlet weak var bottomCurrencyPicker: UIPickerView!
 
-  var delegate: ChangeCurrencyDelegate?
+  weak var delegate: ChangeCurrencyDelegate?
 
   var topPickerOptions = [
     (symbol: String, name: String, sign: String, flag: UIImage, country: String)]()

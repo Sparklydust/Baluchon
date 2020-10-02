@@ -9,13 +9,13 @@
 import Foundation
 
 class FakeResponseData {
-  static let responsOK = HTTPURLResponse(
+  static let responseOK = HTTPURLResponse(
     url: URL(string: "https://www.openclassrooms.com")!,
     statusCode: 200, httpVersion: nil, headerFields: nil)!
-  static let responsKO = HTTPURLResponse(
+  static let responseKO = HTTPURLResponse(
     url: URL(string: "https://www.openclassrooms.com")!,
     statusCode: 500, httpVersion: nil, headerFields: nil)!
-
+  
   static let APIsRulerIncorrectData = "erreur".data(using: .utf8)!
 
   static var exchangeCorrectData: Data {

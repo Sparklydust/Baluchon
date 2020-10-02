@@ -41,8 +41,7 @@ class ForecastViewController: UIViewController, CLLocationManagerDelegate {
   }
 
   // Button that goes to User Preferences
-  @IBAction func changeLocation(_ sender: UIButton) {
-  }
+  @IBAction func changeLocation(_ sender: UIButton) {}
 }
 
 //MARK: - Location Manager Delegate Methods
@@ -61,7 +60,7 @@ extension ForecastViewController {
 
       latLongParams = ["lat": latitude, "lon": longitude]
 
-      // Calling the apito get the weather forecast with coordinates
+      // Calling the API to get the weather forecast with coordinates
       activityIndicator.isHidden = false
       APIsRuler.shared.getLatLongForecast(
       lat: latitude, lon: longitude) { (success, weatherLatLonResult) in
@@ -134,7 +133,7 @@ extension ForecastViewController: ChangeCityDelegate {
         self.presentAlert()
       }
     }
-  }
+  } 
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "goToPreferences" {

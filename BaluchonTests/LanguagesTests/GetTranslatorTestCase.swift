@@ -40,7 +40,7 @@ class GetTranslationTestCase: XCTestCase {
   
   func testGetTranslationShouldPostFailedCallbackIfIncorrectResponse() {
     // Given
-    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.translatorCorrectData, response: FakeResponseData.responsKO, error: nil))
+    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.translatorCorrectData, response: FakeResponseData.responseKO, error: nil))
     // When
     let expectation = XCTestExpectation(description: "Wait for queue change")
     apiSRuler.getTranslation(q: "marcher ou mourir", source: "fr", target: "en") { (success, translationResult) in
@@ -54,7 +54,7 @@ class GetTranslationTestCase: XCTestCase {
   
   func testGetTranslationShouldPostFailedCallbackIfIncorrectData() {
     // Given
-    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.APIsRulerIncorrectData, response: FakeResponseData.responsOK, error: nil))
+    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.APIsRulerIncorrectData, response: FakeResponseData.responseOK, error: nil))
     // When
     let expectation = XCTestExpectation(description: "Wait for queue change")
     apiSRuler.getTranslation(q: "marcher ou mourir", source: "fr", target: "en") { (success, translationResult) in
@@ -68,7 +68,7 @@ class GetTranslationTestCase: XCTestCase {
   
   func testGetTranslationShouldPostSuccessCallbackAndCorrectData() {
     // Given
-    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.translatorCorrectData, response: FakeResponseData.responsOK, error: nil))
+    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.translatorCorrectData, response: FakeResponseData.responseOK, error: nil))
     // When
     let expectation = XCTestExpectation(description: "Wait for queue change")
     apiSRuler.getTranslation(q: "Marcher ou mourir", source: "fr", target: "en") { (success, translationResult) in

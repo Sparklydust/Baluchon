@@ -13,6 +13,7 @@ class GetExchangeRateTestCase: XCTestCase {
   func testGetExchangeRateShouldPostFailedCallbackIfError() {
     // Given
     let apiSRuler = APIsRuler(session: URLSessionFake(data: nil, response: nil, error: FakeResponseData.error))
+
     // When
     let expectation = XCTestExpectation(description: "Wait for queue change")
     apiSRuler.getExchangeRate(from: "EUR", to: "USD", amount: "1") { (success, ConversionResult) in
@@ -24,7 +25,7 @@ class GetExchangeRateTestCase: XCTestCase {
     }
     wait(for: [expectation], timeout: 0.01)
   }
-  
+
   func testGetExchangeRateShouldPostFailedCallbackIfNoData() {
     // Given
     let apiSRuler = APIsRuler(session: URLSessionFake(data: nil, response: nil, error: nil))
@@ -39,10 +40,10 @@ class GetExchangeRateTestCase: XCTestCase {
     }
     wait(for: [expectation], timeout: 0.01)
   }
-  
+
   func testGetExchangeRateShouldPostFailedCallbackIfIncorrectResponse() {
     // Given
-    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.exchangeCorrectData, response: FakeResponseData.responsKO, error: nil))
+    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.exchangeCorrectData, response: FakeResponseData.responseKO, error: nil))
     // When
     let expectation = XCTestExpectation(description: "Wait for queue change")
     apiSRuler.getExchangeRate(from: "EUR", to: "USD", amount: "1") { (success, ConversionResult) in
@@ -54,10 +55,10 @@ class GetExchangeRateTestCase: XCTestCase {
     }
     wait(for: [expectation], timeout: 0.01)
   }
-  
+
   func testGetExchangeRateShouldPostFailedCallbackIfIncorrectData() {
     // Given
-    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.APIsRulerIncorrectData, response: FakeResponseData.responsOK, error: nil))
+    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.APIsRulerIncorrectData, response: FakeResponseData.responseOK, error: nil))
     // When
     let expectation = XCTestExpectation(description: "Wait for queue change")
     apiSRuler.getExchangeRate(from: "EUR", to: "USD", amount: "1") { (success, ConversionResult) in
@@ -72,7 +73,7 @@ class GetExchangeRateTestCase: XCTestCase {
   
   func testGetExchangeRateShouldPostSuccessCallbackAndCorrectData() {
     // Given
-    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.exchangeCorrectData, response: FakeResponseData.responsOK, error: nil))
+    let apiSRuler = APIsRuler(session: URLSessionFake(data: FakeResponseData.exchangeCorrectData, response: FakeResponseData.responseOK, error: nil))
     // When
     let expectation = XCTestExpectation(description: "Wait for queue change")
     apiSRuler.getExchangeRate(from: "EUR", to: "USD", amount: "1") { (success, ConversionResult) in
@@ -89,5 +90,4 @@ class GetExchangeRateTestCase: XCTestCase {
     }
     wait(for: [expectation], timeout: 0.01)
   }
-  
 }

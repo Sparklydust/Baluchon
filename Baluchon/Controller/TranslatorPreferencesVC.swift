@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChangeLanguageDelegate {
+protocol ChangeLanguageDelegate: AnyObject {
   func userSetLanguages(top: LanguageTuple, bottom: LanguageTuple)
 }
 
@@ -29,7 +29,7 @@ class TranslatorPreferencesVC: UIViewController {
   @IBOutlet weak var bottomLanguageLabel: UILabel!
   @IBOutlet weak var bottomLanguagePicker: UIPickerView!
 
-  var delegate: ChangeLanguageDelegate?
+  weak var delegate: ChangeLanguageDelegate?
 
   var topPickerOptions = [
     (code: String, language: String, flag: UIImage, country: String)]()
